@@ -475,18 +475,6 @@ That fallback must not be used for production.
 -   CI/CD
 -   Production monitoring
 
-# 👨‍💻 Author
 
-**Chirag Pawar**
-
-GitHub: https://github.com/LeutnantMutig
-
-Portfolio: https://chiragpawar.vercel.app/
-
-LinkedIn: https://www.linkedin.com/in/chiragpawar01/
-
-# 📄 License
-
-This project is licensed under the **MIT License**.
 
 See [`LICENSE`](LICENSE) for details.
