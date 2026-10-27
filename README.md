@@ -1,3 +1,3 @@
 
 
-This repository contains the projects completed during the Third Year, First Semester training.
+This repository contains the assignmentss completed during the Third Year, First Semester training.
