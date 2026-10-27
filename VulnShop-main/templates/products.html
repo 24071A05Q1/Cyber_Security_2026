@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block title %}Products — NexCart{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="/">Home</a> <span>›</span>
+    <span>All Products</span>
+  </div>
+
+  <div class="shop-layout">
+
+    <!-- Sidebar -->
+    <aside class="shop-sidebar">
+      <h4>Shop by Category</h4>
+      <nav class="sidebar-nav">
+        <a href="/products" class="sidebar-link {% if not request.args.get('id') %}active{% endif %}">All Products</a>
+        <a href="/products?id=1" class="sidebar-link">💻 Laptops</a>
+        <a href="/products?id=2" class="sidebar-link">📱 Smartphones</a>
+        <a href="/products?id=3" class="sidebar-link">📟 Tablets</a>
+        <a href="/products?id=4" class="sidebar-link">🎧 Audio & Headphones</a>
+        <a href="/products?id=5" class="sidebar-link">⌨️ Accessories</a>
+      </nav>
+
+      <div class="sidebar-section">
+        <h4>Price Range</h4>
+        <div class="filter-checks">
+          <label><input type="checkbox"> Under $100</label>
+          <label><input type="checkbox"> $100 – $300</label>
+          <label><input type="checkbox"> $300 – $600</label>
+          <label><input type="checkbox"> $600 – $1000</label>
+          <label><input type="checkbox"> Over $1000</label>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h4>Rating</h4>
+        <div class="filter-checks">
+          <label><input type="checkbox"> ★★★★★ only</label>
+          <label><input type="checkbox"> ★★★★☆ & up</label>
+          <label><input type="checkbox"> ★★★☆☆ & up</label>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h4>Availability</h4>
+        <div class="filter-checks">
+          <label><input type="checkbox"> In Stock</label>
+          <label><input type="checkbox"> Include pre-orders</label>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main listing -->
+    <div class="shop-main">
+      <div class="shop-toolbar">
+        <p class="results-info">
+          {% if products %}{{ products|length }} product{% if products|length != 1 %}s{% endif %} found{% else %}No products found{% endif %}
+        </p>
+        <div class="sort-select">
+          <label>Sort by</label>
+          <select>
+            <option>Featured</option>
+            <option>Price: Low → High</option>
+            <option>Price: High → Low</option>
+            <option>Top Rated</option>
+            <option>Newest</option>
+          </select>
+        </div>
+      </div>
+
+      {% if products %}
+        <div class="product-grid">
+          {% for p in products %}
+          <a href="/products?id={{ p['id'] }}" class="product-card">
+            <div class="product-img">
+              {% if p['id'] == 1 %}💻{% elif p['id'] == 2 %}📱{% elif p['id'] == 3 %}📟{% elif p['id'] == 4 %}🎧{% else %}⌨️{% endif %}
+            </div>
+            <div class="product-body">
+              <div class="product-brand">NexCart</div>
+              <h3 class="product-name">{{ p['name'] }}</h3>
+              <div class="product-desc">{{ p['description'] }}</div>
+              <div class="product-stars">★★★★★ <span>({{ range(200, 5000)|random }})</span></div>
+              <div class="product-footer">
+                <span class="product-price">${{ "%.2f"|format(p['price']) }}</span>
+                <button class="btn-cart" onclick="event.preventDefault()">Add to Cart</button>
+              </div>
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="empty-state">
+          <div class="empty-icon">📦</div>
+          <h3>No products found</h3>
+          <p>Try adjusting your filters or <a href="/products">view all products</a>.</p>
+        </div>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+{% endblock %}

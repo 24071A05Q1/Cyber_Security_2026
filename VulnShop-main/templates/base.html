@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}NexCart — Premium Tech Store{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ── Topbar ── -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <span>🚚 Free shipping on orders over $50</span>
+      <span class="topbar-divider">|</span>
+      <span>⭐ Rated 4.9/5 by 12,000+ customers</span>
+    </div>
+  </div>
+
+  <!-- ── Main Navbar ── -->
+  <header class="header">
+    <div class="header-inner">
+
+      <!-- Logo -->
+      <a class="logo" href="/">
+        <span class="logo-icon">◈</span>
+        <span class="logo-text">Nex<strong>Cart</strong></span>
+      </a>
+
+      <!-- Search bar -->
+      <form class="header-search" action="/search" method="GET">
+        <input type="text" name="q" placeholder="Search for products, brands…" />
+        <button type="submit" class="search-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+      </form>
+
+      <!-- Nav actions -->
+      <div class="header-actions">
+        {% if session.get('user') %}
+          <a href="/profile" class="action-link" title="My Account">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <span class="action-label">{{ session['user'] }}</span>
+          </a>
+          {% if session.get('role') == 'admin' %}
+            <a href="/admin" class="action-link admin-link" title="Admin">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              <span class="action-label">Dashboard</span>
+            </a>
+          {% endif %}
+          <a href="/logout" class="action-link" title="Sign out">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            <span class="action-label">Sign out</span>
+          </a>
+        {% else %}
+          <a href="/login" class="action-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <span class="action-label">Sign in</span>
+          </a>
+          <a href="/register" class="btn btn-primary btn-sm">Join Free</a>
+        {% endif %}
+        <a href="#" class="action-link cart-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Nav menu -->
+    <nav class="nav-menu">
+      <div class="nav-inner">
+        <a href="/products">All Products</a>
+        <a href="/products?id=1">Laptops</a>
+        <a href="/products?id=2">Smartphones</a>
+        <a href="/products?id=3">Tablets</a>
+        <a href="/products?id=4">Audio</a>
+        <a href="/products?id=5">Accessories</a>
+        <a href="/search?q=deals" class="nav-sale">🔥 Hot Deals</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ── Page Content ── -->
+  <main>{% block content %}{% endblock %}</main>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <div class="footer-logo">◈ Nex<strong>Cart</strong></div>
+        <p>Your destination for the latest in consumer technology. Quality products, fast delivery, exceptional support.</p>
+        <div class="social-row">
+          <a href="#">𝕏</a><a href="#">in</a><a href="#">📘</a><a href="#">▶</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="/products">All Products</a>
+        <a href="/search?q=new">New Arrivals</a>
+        <a href="/search?q=deals">Deals</a>
+        <a href="/search?q=refurbished">Refurbished</a>
+      </div>
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="/login">Sign In</a>
+        <a href="/register">Create Account</a>
+        <a href="/profile">My Profile</a>
+        <a href="#">Order History</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="#">Help Centre</a>
+        <a href="#">Returns & Refunds</a>
+        <a href="#">Track Order</a>
+        <a href="#">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 NexCart Technologies Ltd. All rights reserved.</p>
+      <div class="footer-badges">
+        <span>🔒 SSL Secured</span>
+        <span>💳 Visa / Mastercard / PayPal</span>
+        <span>📦 Free Returns</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

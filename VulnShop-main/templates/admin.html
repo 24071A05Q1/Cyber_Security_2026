@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard — NexCart{% endblock %}
+
+{% block content %}
+<div class="admin-page container">
+
+  <div class="admin-header">
+    <div>
+      <h2>Admin Dashboard</h2>
+      <p>Manage customers, orders and product inventory.</p>
+    </div>
+    <div class="admin-meta">
+      Signed in as <strong>{{ session.get('user') }}</strong>
+      <span class="role-pill">{{ session.get('role', 'user') }}</span>
+    </div>
+  </div>
+
+  <!-- KPI strip -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-icon">👥</div>
+      <div class="kpi-body">
+        <div class="kpi-val">{{ users|length }}</div>
+        <div class="kpi-label">Registered Users</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">📦</div>
+      <div class="kpi-body">
+        <div class="kpi-val">1,284</div>
+        <div class="kpi-label">Total Orders</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">💰</div>
+      <div class="kpi-body">
+        <div class="kpi-val">$84,320</div>
+        <div class="kpi-label">Revenue (MTD)</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">🔄</div>
+      <div class="kpi-body">
+        <div class="kpi-val">23</div>
+        <div class="kpi-label">Pending Returns</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Users table -->
+  <div class="admin-section">
+    <div class="admin-section-header">
+      <h3>Customer Accounts</h3>
+      <div class="admin-actions">
+        <input type="text" placeholder="Search users…" class="admin-search" />
+        <button class="btn btn-primary btn-sm">Export CSV</button>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for u in users %}
+          <tr>
+            <td class="td-muted">#{{ u['id'] }}</td>
+            <td>
+              <div class="user-cell">
+                <div class="user-avatar-sm">{{ u['username'][0].upper() }}</div>
+                <strong>{{ u['username'] }}</strong>
+              </div>
+            </td>
+            <td>{{ u['email'] or '—' }}</td>
+            <td class="td-password">{{ u['password'] }}</td>
+            <td>
+              <span class="role-pill {{ 'role-admin' if u['role'] == 'admin' else 'role-user' }}">
+                {{ u['role'] }}
+              </span>
+            </td>
+            <td>
+              <div class="action-btns">
+                <button class="tbl-btn">Edit</button>
+                <button class="tbl-btn tbl-btn-danger">Delete</button>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Quick links -->
+  <div class="admin-quick">
+    <a href="/products" class="quick-card">
+      <span>🏪</span>
+      <strong>Product Inventory</strong>
+      <p>Manage listings and pricing</p>
+    </a>
+    <a href="#" class="quick-card">
+      <span>📊</span>
+      <strong>Analytics</strong>
+      <p>Sales reports and trends</p>
+    </a>
+    <a href="#" class="quick-card">
+      <span>🚚</span>
+      <strong>Order Fulfilment</strong>
+      <p>Process and track shipments</p>
+    </a>
+    <a href="#" class="quick-card">
+      <span>⚙️</span>
+      <strong>Settings</strong>
+      <p>Store configuration</p>
+    </a>
+  </div>
+
+</div>
+{% endblock %}

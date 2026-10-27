@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Sign In — NexCart{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+  <div class="auth-left">
+    <div class="auth-brand">◈ Nex<strong>Cart</strong></div>
+    <h2>Welcome back.</h2>
+    <p>Sign in to your account to track orders, manage your wishlist and access exclusive member deals.</p>
+    <div class="auth-perks">
+      <div class="perk">✓ Exclusive member pricing</div>
+      <div class="perk">✓ Order tracking & history</div>
+      <div class="perk">✓ Faster checkout</div>
+      <div class="perk">✓ Early access to sales</div>
+    </div>
+  </div>
+
+  <div class="auth-right">
+    <div class="auth-card">
+      <h3>Sign in to your account</h3>
+      <p class="auth-sub">Don't have one? <a href="/register">Create a free account</a></p>
+
+      {% if error %}
+        <div class="form-alert form-alert-error">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          {{ error }}
+        </div>
+      {% endif %}
+
+      <form method="POST" action="/login" class="auth-form">
+        <div class="field">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Enter your username" required autocomplete="username" />
+        </div>
+        <div class="field">
+          <label for="password">
+            Password
+            <a href="#" class="field-link">Forgot password?</a>
+          </label>
+          <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password" />
+        </div>
+        <label class="checkbox-label">
+          <input type="checkbox" /> Keep me signed in
+        </label>
+        <button type="submit" class="btn btn-primary btn-full btn-lg">Sign In</button>
+      </form>
+
+      <div class="auth-divider"><span>or continue with</span></div>
+      <div class="social-auth">
+        <button class="social-btn">🇬 Google</button>
+        <button class="social-btn">🍎 Apple</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

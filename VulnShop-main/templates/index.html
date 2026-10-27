@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% block title %}NexCart — Premium Tech Store{% endblock %}
+
+{% block content %}
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">New Season Drop 2025</div>
+    <h1 class="hero-title">Tech That<br><em>Moves You Forward</em></h1>
+    <p class="hero-sub">Discover cutting-edge laptops, smartphones, and audio gear — curated for people who demand the best.</p>
+    <div class="hero-cta">
+      <a href="/products" class="btn btn-hero">Shop Now</a>
+      <a href="/search?q=deals" class="btn btn-ghost">View Deals</a>
+    </div>
+    <div class="hero-trust">
+      <span>✓ Free shipping</span>
+      <span>✓ 2-year warranty</span>
+      <span>✓ 30-day returns</span>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card floating">
+      <div class="hcard-img">💻</div>
+      <div class="hcard-body">
+        <div class="hcard-name">ProBook Ultra 15</div>
+        <div class="hcard-price">$999.99</div>
+        <div class="hcard-stars">★★★★★</div>
+      </div>
+    </div>
+    <div class="hero-card floating delay-1">
+      <div class="hcard-img sm">📱</div>
+      <div class="hcard-body">
+        <div class="hcard-name">NexPhone 14 Pro</div>
+        <div class="hcard-price">$499.99</div>
+        <div class="hcard-stars">★★★★★</div>
+      </div>
+    </div>
+    <div class="hero-blob"></div>
+  </div>
+</section>
+
+<!-- ══ CATEGORY STRIP ══ -->
+<section class="categories">
+  <div class="container">
+    <div class="cat-grid">
+      <a href="/products?id=1" class="cat-card">
+        <div class="cat-icon">💻</div>
+        <span>Laptops</span>
+      </a>
+      <a href="/products?id=2" class="cat-card">
+        <div class="cat-icon">📱</div>
+        <span>Phones</span>
+      </a>
+      <a href="/products?id=3" class="cat-card">
+        <div class="cat-icon">📟</div>
+        <span>Tablets</span>
+      </a>
+      <a href="/products?id=4" class="cat-card">
+        <div class="cat-icon">🎧</div>
+        <span>Audio</span>
+      </a>
+      <a href="/products?id=5" class="cat-card">
+        <div class="cat-icon">⌨️</div>
+        <span>Accessories</span>
+      </a>
+      <a href="/search?q=deals" class="cat-card cat-sale">
+        <div class="cat-icon">🔥</div>
+        <span>Hot Deals</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURED PRODUCTS ══ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Featured Products</h2>
+      <a href="/products" class="see-all">See all →</a>
+    </div>
+    <div class="product-grid">
+
+      <a href="/products?id=1" class="product-card">
+        <div class="product-badge">Best Seller</div>
+        <div class="product-img">💻</div>
+        <div class="product-body">
+          <div class="product-brand">NexCart Originals</div>
+          <h3 class="product-name">ProBook Ultra 15</h3>
+          <div class="product-stars">★★★★★ <span>(2,341)</span></div>
+          <div class="product-footer">
+            <span class="product-price">$999.99</span>
+            <button class="btn-cart">Add to Cart</button>
+          </div>
+        </div>
+      </a>
+
+      <a href="/products?id=2" class="product-card">
+        <div class="product-badge new">New</div>
+        <div class="product-img">📱</div>
+        <div class="product-body">
+          <div class="product-brand">NexPhone</div>
+          <h3 class="product-name">NexPhone 14 Pro</h3>
+          <div class="product-stars">★★★★★ <span>(4,892)</span></div>
+          <div class="product-footer">
+            <span class="product-price">$499.99</span>
+            <button class="btn-cart">Add to Cart</button>
+          </div>
+        </div>
+      </a>
+
+      <a href="/products?id=3" class="product-card">
+        <div class="product-img">📟</div>
+        <div class="product-body">
+          <div class="product-brand">NexTab</div>
+          <h3 class="product-name">SlimTab Pro 11</h3>
+          <div class="product-stars">★★★★☆ <span>(1,204)</span></div>
+          <div class="product-footer">
+            <span class="product-price">$299.99</span>
+            <button class="btn-cart">Add to Cart</button>
+          </div>
+        </div>
+      </a>
+
+      <a href="/products?id=4" class="product-card">
+        <div class="product-badge sale">−20%</div>
+        <div class="product-img">🎧</div>
+        <div class="product-body">
+          <div class="product-brand">SoundNex</div>
+          <h3 class="product-name">AirMax Pro Headphones</h3>
+          <div class="product-stars">★★★★★ <span>(879)</span></div>
+          <div class="product-footer">
+            <div>
+              <span class="product-price">$149.99</span>
+              <span class="product-old">$189.99</span>
+            </div>
+            <button class="btn-cart">Add to Cart</button>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROMO BANNER ══ -->
+<section class="promo-banner">
+  <div class="container">
+    <div class="promo-inner">
+      <div class="promo-text">
+        <div class="promo-eyebrow">Limited Time Offer</div>
+        <h2>Up to 30% off<br>on Selected Items</h2>
+        <a href="/search?q=deals" class="btn btn-promo">Shop the Sale</a>
+      </div>
+      <div class="promo-visual">⚡</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TRUST SECTION ══ -->
+<section class="trust-section">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-item">
+        <div class="trust-icon">🚚</div>
+        <h4>Free Delivery</h4>
+        <p>On all orders over $50, shipped within 24 hours.</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🔄</div>
+        <h4>Easy Returns</h4>
+        <p>30-day hassle-free returns, no questions asked.</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🛡</div>
+        <h4>2-Year Warranty</h4>
+        <p>Full coverage on every product we sell.</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">💬</div>
+        <h4>24/7 Support</h4>
+        <p>Our team is always here to help you out.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block title %}{% if query %}Search: {{ query }} — NexCart{% else %}Search — NexCart{% endif %}{% endblock %}
+
+{% block content %}
+<div class="search-page container">
+
+  <!-- Search header -->
+  <div class="search-header">
+    <form method="GET" action="/search" class="search-bar-lg">
+      <input type="text" name="q" value="{{ query | safe }}" placeholder="Search products, brands, categories…" class="search-input-lg" />
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+  </div>
+
+  {% if query %}
+  <!-- Results bar -->
+  <div class="results-bar">
+    <p class="results-count">Showing results for: <strong>{{ query | safe }}</strong></p>
+    <div class="sort-bar">
+      <label>Sort by:</label>
+      <select>
+        <option>Relevance</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+        <option>Customer Rating</option>
+        <option>Newest First</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Filters + Results layout -->
+  <div class="search-layout">
+    <aside class="search-filters">
+      <h4>Filters</h4>
+      <div class="filter-group">
+        <h5>Category</h5>
+        <label><input type="checkbox"> Laptops</label>
+        <label><input type="checkbox"> Smartphones</label>
+        <label><input type="checkbox"> Tablets</label>
+        <label><input type="checkbox"> Audio</label>
+        <label><input type="checkbox"> Accessories</label>
+      </div>
+      <div class="filter-group">
+        <h5>Price Range</h5>
+        <label><input type="checkbox"> Under $100</label>
+        <label><input type="checkbox"> $100 – $299</label>
+        <label><input type="checkbox"> $300 – $599</label>
+        <label><input type="checkbox"> $600 – $999</label>
+        <label><input type="checkbox"> $1000+</label>
+      </div>
+      <div class="filter-group">
+        <h5>Customer Rating</h5>
+        <label><input type="checkbox"> ★★★★★ (5)</label>
+        <label><input type="checkbox"> ★★★★☆ (4+)</label>
+        <label><input type="checkbox"> ★★★☆☆ (3+)</label>
+      </div>
+    </aside>
+
+    <div class="search-results">
+      <!-- Sample results display -->
+      <a href="/products?id=1" class="result-card">
+        <div class="result-img">💻</div>
+        <div class="result-body">
+          <div class="result-brand">NexCart Originals</div>
+          <h3 class="result-name">ProBook Ultra 15</h3>
+          <div class="result-stars">★★★★★ <span>2,341 reviews</span></div>
+          <div class="result-desc">High-performance 15" laptop with Intel Core i7, 16GB RAM, 512GB SSD. Perfect for professionals and creators.</div>
+          <div class="result-price-row">
+            <span class="result-price">$999.99</span>
+            <span class="result-ship">✓ Free delivery</span>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-sm">Add to Cart</button>
+      </a>
+
+      <a href="/products?id=2" class="result-card">
+        <div class="result-img">📱</div>
+        <div class="result-body">
+          <div class="result-brand">NexPhone</div>
+          <h3 class="result-name">NexPhone 14 Pro</h3>
+          <div class="result-stars">★★★★★ <span>4,892 reviews</span></div>
+          <div class="result-desc">Latest flagship smartphone with 6.7" OLED display, 200MP camera, and all-day battery life.</div>
+          <div class="result-price-row">
+            <span class="result-price">$499.99</span>
+            <span class="result-ship">✓ Free delivery</span>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-sm">Add to Cart</button>
+      </a>
+    </div>
+  </div>
+
+  {% else %}
+  <!-- No query state -->
+  <div class="search-empty">
+    <div class="empty-icon">🔍</div>
+    <h3>What are you looking for?</h3>
+    <p>Search our full catalogue of 10,000+ products across all categories.</p>
+    <div class="popular-searches">
+      <span>Popular:</span>
+      <a href="/search?q=laptop">laptop</a>
+      <a href="/search?q=iphone">iphone</a>
+      <a href="/search?q=headphones">headphones</a>
+      <a href="/search?q=tablet">tablet</a>
+      <a href="/search?q=gaming">gaming</a>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

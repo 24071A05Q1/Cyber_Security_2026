@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block title %}My Account — NexCart{% endblock %}
+
+{% block content %}
+<div class="account-page container">
+
+  <!-- Sidebar nav -->
+  <aside class="account-sidebar">
+    <div class="account-avatar">
+      <div class="avatar-circle">{{ session.get('user', 'U')[0].upper() }}</div>
+      <div class="avatar-info">
+        <strong>{{ session.get('user', 'User') }}</strong>
+        <span>{{ 'Administrator' if session.get('role') == 'admin' else 'Member' }}</span>
+      </div>
+    </div>
+    <nav class="account-nav">
+      <a href="/profile" class="acct-link active">👤 Personal Info</a>
+      <a href="#" class="acct-link">📦 Orders</a>
+      <a href="#" class="acct-link">❤️ Wishlist</a>
+      <a href="#" class="acct-link">💳 Payment Methods</a>
+      <a href="#" class="acct-link">📍 Addresses</a>
+      <a href="#" class="acct-link">🔔 Notifications</a>
+      <a href="/logout" class="acct-link acct-logout">→ Sign Out</a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <div class="account-main">
+    <div class="account-header">
+      <h2>Personal Information</h2>
+      <p>Manage your account details and preferences.</p>
+    </div>
+
+    {% if message %}
+      <div class="form-alert form-alert-success">✓ {{ message }}</div>
+    {% endif %}
+
+    <!-- Account info cards -->
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="info-card-header">
+          <h4>Account Details</h4>
+          <button class="btn-edit">Edit</button>
+        </div>
+        <div class="info-rows">
+          <div class="info-row">
+            <span>Username</span>
+            <strong>{{ user['username'] if user else session.get('user') }}</strong>
+          </div>
+          <div class="info-row">
+            <span>Account Type</span>
+            <strong>{{ 'Administrator' if session.get('role') == 'admin' else 'Standard Member' }}</strong>
+          </div>
+          <div class="info-row">
+            <span>Member Since</span>
+            <strong>January 2025</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-header">
+          <h4>Contact Information</h4>
+        </div>
+        <!-- CSRF vulnerability: no token in form -->
+        <form method="POST" action="/profile" class="profile-form">
+          <div class="field">
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="your@email.com"
+                   value="{{ user['email'] if user and user['email'] else '' }}" />
+          </div>
+          <div class="field">
+            <label>Phone Number</label>
+            <input type="tel" placeholder="+1 (555) 000-0000" />
+          </div>
+          <div class="field">
+            <label>Date of Birth</label>
+            <input type="date" />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="button" class="btn btn-ghost-sm">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Order summary strip -->
+    <div class="order-summary-strip">
+      <div class="os-item">
+        <span class="os-num">12</span>
+        <span>Total Orders</span>
+      </div>
+      <div class="os-item">
+        <span class="os-num">3</span>
+        <span>In Transit</span>
+      </div>
+      <div class="os-item">
+        <span class="os-num">8</span>
+        <span>Delivered</span>
+      </div>
+      <div class="os-item">
+        <span class="os-num">1</span>
+        <span>Returned</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
