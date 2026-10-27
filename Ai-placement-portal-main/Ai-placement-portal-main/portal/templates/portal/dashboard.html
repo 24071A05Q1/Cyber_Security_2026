@@ -1,0 +1,34 @@
+{% extends 'portal/base.html' %}
+{% load static %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="dashboard-header">
+        <h1>Registered Students</h1>
+    </div>
+
+    {% if students %}
+    <div class="jobs-grid">
+        {% for student in students %}
+        <div class="job-card" style="text-align: center;">
+            <img src="{{ student.photo.url }}" width="80" height="80" style="border-radius: 50%; margin-bottom: 1rem; object-fit: cover;">
+            <h3>{{ student.name }}</h3>
+            <p style="color: var(--secondary-color);">{{ student.email }}</p>
+            <p><strong>Skills:</strong> {{ student.skills|default:"Not specified" }}</p>
+            {% if student.resume %}
+                <div class="job-actions">
+                    <a href="{{ student.resume.url }}" class="btn btn-primary" target="_blank">View Resume</a>
+                </div>
+            {% else %}
+                <p>No resume uploaded.</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No students are registered yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

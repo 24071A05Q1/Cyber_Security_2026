@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Interview</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url("{% static 'portal/img/Library.jpg' %}") center/cover no-repeat fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            max-width: 700px;
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #3f51b5;
+        }
+        label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+            border: 2px solid #d1c4e9;
+            border-radius: 10px;
+            font-size: 16px;
+            background: white;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #5e35b1 0%, #7e57c2 100%);
+            color: white;
+            border: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #4527a0 0%, #6a1b9a 100%);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Schedule Interview for {{ application.student.username }}</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label for="date">Interview Date:</label>
+            <input type="date" name="date" required>
+
+            <label for="time">Interview Time:</label>
+            <input type="time" name="time" required>
+
+            <label for="round_type">Round Type:</label>
+            <select name="round_type">
+                <option value="HR">HR Round</option>
+                <option value="Technical">Technical Round</option>
+                <option value="Final">Final Round</option>
+            </select>
+
+            <label for="location">Location:</label>
+            <input type="text" name="location" placeholder="Enter location" required>
+
+            <label for="notes">Notes (optional):</label>
+            <textarea name="notes" placeholder="Add any notes..."></textarea>
+
+            <button type="submit">Schedule Interview</button>
+        </form>
+    </div>
+</body>
+</html>
