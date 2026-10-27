@@ -140,7 +140,3 @@ vulnshop/
 
 ---
 
-## CV Summary
-> *"Engineered 'VulnShop', a local Flask + SQLite web application intentionally embedding OWASP
-> vulnerabilities (XSS, SQLi, Broken Access Control, CSRF). Performed manual exploitation,
-> documented proof-of-concept payloads, and authored parameterized mitigations."*
