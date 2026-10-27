@@ -476,8 +476,4 @@ That fallback must not be used for production.
 -   Production monitoring
 
 
-# 📄 License
 
-This project is licensed under the **MIT License**.
-
-See [`LICENSE`](LICENSE) for details.
