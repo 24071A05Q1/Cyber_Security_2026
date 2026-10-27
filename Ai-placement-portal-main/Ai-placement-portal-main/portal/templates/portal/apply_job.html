@@ -1,0 +1,49 @@
+{% extends 'portal/base.html' %}
+{% load static %}
+
+{% block title %}Apply for {{ job.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="form-container">
+        <h2>Apply for {{ job.title }}</h2>
+        <p style="text-align: center; margin-top: -1rem; margin-bottom: 2rem; color: var(--secondary-color);">at {{ job.company_name }}</p>
+
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="content-box" style="margin-bottom: 2rem;">
+            <h4>Job Summary</h4>
+            <p><strong>Location:</strong> {{ job.location }}</p>
+            <p><strong>Type:</strong> {{ job.get_job_type_display }}</p>
+            {% if job.salary_range %}
+            <p><strong>Salary:</strong> {{ job.salary_range }}</p>
+            {% endif %}
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.cover_letter.id_for_label }}">Cover Letter:</label>
+                {{ form.cover_letter }}
+                {% if form.cover_letter.errors %}
+                <div class="error" style="color: var(--error-color); font-size: 0.9rem; margin-top: 0.5rem;">{{ form.cover_letter.errors.0 }}</div>
+                {% endif %}
+                <small style="display: block; margin-top: 0.5rem; color: var(--secondary-color);">Tell us why you're a great fit for this role.</small>
+            </div>
+
+            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <button type="submit" class="btn btn-primary" style="flex-grow: 1;">Submit Application</button>
+                <a href="{% url 'job_details' job.id %}" class="btn btn-secondary" style="flex-grow: 1;">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
