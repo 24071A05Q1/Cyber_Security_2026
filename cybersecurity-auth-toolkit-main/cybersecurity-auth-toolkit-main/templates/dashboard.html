@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Secure Dashboard</h2>
+<div style="background-color: #f1f5f9; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem; font-size: 0.9rem;">
+    <p style="margin: 0 0 0.5rem 0;"><strong>Username:</strong> {{ user.username }}</p>
+    <p style="margin: 0 0 0.5rem 0;"><strong>Email:</strong> {{ user.email }}</p>
+    <p style="margin: 0;"><strong>2FA Status:</strong> {% if user.is_2fa_enabled %}Enabled ✅{% else %}Disabled ❌{% endif %}</p>
+</div>
+
+{% if not user.is_2fa_enabled %}
+<div style="margin-bottom: 1.5rem;">
+    <a href="{{ url_for('auth.setup_2fa') }}" style="display: block; text-align: center; padding: 0.6rem; background-color: #059669; color: white; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600;">Enable Google Authenticator 2FA</a>
+</div>
+{% endif %}
+
+<form method="POST" action="{{ url_for('auth.logout') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <button type="submit" style="background-color: #ef4444;">Terminate Session (Logout)</button>
+</form>
+{% endblock %}

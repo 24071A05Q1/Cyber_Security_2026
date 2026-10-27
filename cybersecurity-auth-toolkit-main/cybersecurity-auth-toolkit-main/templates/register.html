@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Create Account</h2>
+{% if error %}
+    <div class="alert-error">{{ error }}</div>
+{% endif %}
+<form method="POST" action="{{ url_for('auth.register') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required autocomplete="username">
+    </div>
+    <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required autocomplete="email">
+    </div>
+    <div class="form-group">
+        <label for="password">Password (Min 12 chars)</label>
+        <input type="password" id="password" name="password" required autocomplete="new-password">
+        <div class="strength-container">
+            <div class="strength-bar-bg">
+                <div id="strengthFill" class="strength-bar-fill"></div>
+            </div>
+            <div id="strengthText" class="strength-label">Strength: None</div>
+        </div>
+    </div>
+    <button type="submit">Register Account</button>
+</form>
+<div class="switch-auth">
+    Already have an account? <a href="{{ url_for('auth.login') }}">Sign In</a>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/strength.js') }}"></script>
+{% endblock %}

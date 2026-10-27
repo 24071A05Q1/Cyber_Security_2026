@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Two-Factor Verification</h2>
+{% if error %}
+    <div class="alert-error">{{ error }}</div>
+{% endif %}
+<form method="POST" action="{{ url_for('auth.verify_2fa') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <div class="form-group">
+        <label for="token">Enter 6-Digit Code</label>
+        <input type="text" id="token" name="token" maxlength="6" required autocomplete="one-time-code">
+    </div>
+    <button type="submit">Verify Code</button>
+</form>
+{% endblock %}

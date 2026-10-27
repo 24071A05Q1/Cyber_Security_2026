@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Secure Sign In</h2>
+{% if error %}
+    <div class="alert-error">{{ error }}</div>
+{% endif %}
+{% if success %}
+    <div class="alert-success">{{ success }}</div>
+{% endif %}
+<form method="POST" action="{{ url_for('auth.login') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required autocomplete="username">
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required autocomplete="current-password">
+    </div>
+    <button type="submit">Authenticate</button>
+</form>
+<div class="switch-auth">
+    Need an account? <a href="{{ url_for('auth.register') }}">Register</a>
+</div>
+{% endblock %}

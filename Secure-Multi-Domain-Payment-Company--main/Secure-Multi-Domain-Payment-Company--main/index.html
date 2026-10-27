@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayGuard Nexus | Secure Multi-Domain Payment Company Architecture</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-emerald-100 selection:text-emerald-700">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-emerald-600 text-white p-2 rounded-xl shadow-sm flex items-center justify-center">
+                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg text-slate-900 tracking-tight">PayGuard Nexus</h1>
+                    <p class="text-xs text-slate-500 font-medium">Secure Multi-Domain Payment Architecture</p>
+                </div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <nav class="hidden md:flex space-x-1 bg-slate-100 p-1 rounded-xl border border-slate-200">
+                <button onclick="switchTab('domains')" id="tab-domains" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-white text-emerald-600 shadow-xs transition-all flex items-center space-x-1.5">
+                    <i data-lucide="network" class="w-3.5 h-3.5"></i>
+                    <span>Domain Architecture</span>
+                </button>
+                <button onclick="switchTab('payment')" id="tab-payment" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition-all flex items-center space-x-1.5">
+                    <i data-lucide="credit-card" class="w-3.5 h-3.5"></i>
+                    <span>Secure Gateway</span>
+                </button>
+                <button onclick="switchTab('auth')" id="tab-auth" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition-all flex items-center space-x-1.5">
+                    <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+                    <span>Auth & RBAC</span>
+                </button>
+                <button onclick="switchTab('logs')" id="tab-logs" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition-all flex items-center space-x-1.5">
+                    <i data-lucide="terminal" class="w-3.5 h-3.5"></i>
+                    <span>Audit & SIEM Logs</span>
+                </button>
+                <button onclick="switchTab('docs')" id="tab-docs" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition-all flex items-center space-x-1.5">
+                    <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+                    <span>Security Blueprint</span>
+                </button>
+            </nav>
+
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+                <span class="w-1.5 h-1.5 mr-1.5 bg-emerald-500 rounded-full animate-ping"></span>
+                PCI-DSS Compliant Sim
+            </span>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+
+        <!-- ================= TAB 1: DOMAIN ARCHITECTURE ================= -->
+        <div id="section-domains" class="space-y-6">
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-4">
+                <h3 class="text-base font-bold text-slate-900 flex items-center space-x-2">
+                    <i data-lucide="globe" class="w-5 h-5 text-emerald-600"></i>
+                    <span>Multi-Domain Application Separation Topology</span>
+                </h3>
+                <p class="text-xs text-slate-500">To prevent lateral movement and reduce blast radius, PayGuard isolates company domains across distinct security boundaries and CORS policies.</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+                    <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-xs text-slate-900">Main Website</span>
+                            <span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-[10px] font-bold rounded-md">Public Zone</span>
+                        </div>
+                        <p class="font-mono text-[11px] text-slate-500">www.payguard.nexus</p>
+                        <p class="text-xs text-slate-600">Marketing, static content, and public documentation. Strictly decoupled from core databases.</p>
+                    </div>
+
+                    <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-xs text-slate-900">Customer Portal</span>
+                            <span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-[10px] font-bold rounded-md">DMZ Verified</span>
+                        </div>
+                        <p class="font-mono text-[11px] text-slate-500">portal.payguard.nexus</p>
+                        <p class="text-xs text-slate-600">User account management, transaction history, and 2FA session tokens.</p>
+                    </div>
+
+                    <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-xs text-slate-900">Payment Gateway</span>
+                            <span class="px-2 py-0.5 bg-rose-100 text-rose-700 text-[10px] font-bold rounded-md">PCI-DSS Level 1</span>
+                        </div>
+                        <p class="font-mono text-[11px] text-slate-500">pay.payguard.nexus</p>
+                        <p class="text-xs text-slate-600">Tokenized card processing, TLS 1.3 encryption, and strict input sanitization.</p>
+                    </div>
+
+                    <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-xs text-slate-900">Admin Portal</span>
+                            <span class="px-2 py-0.5 bg-purple-100 text-purple-700 text-[10px] font-bold rounded-md">Internal VPN Only</span>
+                        </div>
+                        <p class="font-mono text-[11px] text-slate-500">admin.internal.payguard.nexus</p>
+                        <p class="text-xs text-slate-600">Restricted operational controls requiring hardware token MFA and IP whitelisting.</p>
+                    </div>
+
+                    <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-xs text-slate-900">Backend APIs</span>
+                            <span class="px-2 py-0.5 bg-amber-100 text-amber-700 text-[10px] font-bold rounded-md">Private Subnet</span>
+                        </div>
+                        <p class="font-mono text-[11px] text-slate-500">api.payguard.nexus</p>
+                        <p class="text-xs text-slate-600">Microservices with OAuth2 Bearer token validation and rate limiting.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 2: PAYMENT GATEWAY SIMULATION ================= -->
+        <div id="section-payment" class="hidden space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Tokenized Payment Form -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-4">
+                    <h3 class="font-bold text-base text-slate-900 flex items-center space-x-2">
+                        <i data-lucide="credit-card" class="w-5 h-5 text-emerald-600"></i>
+                        <span>Secure Tokenized Checkout (PCI-DSS Simulation)</span>
+                    </h3>
+                    <p class="text-xs text-slate-500">Demonstrates secure data handling where raw credit card numbers are never stored; they are tokenized immediately.</p>
+                    
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Cardholder Name</label>
+                            <input type="text" id="cardName" value="Alex Morgan" 
+                                class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Credit Card Number (Simulated)</label>
+                            <input type="text" id="cardNumber" value="4532 •••• •••• 8921" maxlength="19"
+                                class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm font-mono focus:outline-hidden focus:ring-2 focus:ring-emerald-500">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Expiry Date</label>
+                                <input type="text" value="10/28" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm font-mono">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">CVV / CVC</label>
+                                <input type="password" value="•••" maxlength="4" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm font-mono">
+                            </div>
+                        </div>
+                        <button onclick="processPayment()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 px-4 rounded-xl text-sm transition-all shadow-sm">
+                            Process Encrypted Payment ($150.00)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Transaction Result & Tokenization Vault -->
+                <div class="bg-slate-900 text-slate-200 rounded-2xl p-6 shadow-inner flex flex-col justify-between font-mono text-xs space-y-4">
+                    <div>
+                        <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
+                            <span class="flex items-center space-x-2 text-slate-300 font-bold">
+                                <i data-lucide="shield" class="w-4 h-4 text-emerald-400"></i>
+                               <span>Tokenization Vault Output</span>
+                            </span>
+                            <span id="payStatusBadge" class="px-2 py-0.5 bg-slate-800 text-slate-400 text-[10px] rounded-md">IDLE</span>
+                        </div>
+                        <div id="paymentVaultLog" class="space-y-2 text-slate-300">
+                            <p class="text-slate-500 italic">[Vault] Ready to tokenize inbound payment payloads...</p>
+                        </div>
+                    </div>
+                    <div class="pt-3 border-t border-slate-800 text-[11px] text-emerald-400">
+                        Security Notice: Raw PAN data masked & hashed via vault tokenization.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ================= TAB 3: AUTH & RBAC ================= -->
+        <div id="section-auth" class="hidden space-y-6">
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-4">
+                <h3 class="text-base font-bold text-slate-900 flex items-center space-x-2">
+                    <i data-lucide="lock" class="w-5 h-5 text-emerald-600"></i>
+                    <span>Authentication & Role-Based Access Control (RBAC)</span>
+                </h3>
+                <p class="text-xs text-slate-500">Test how permissions restrict cross-domain access between Customer Portal and Admin controls.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                    <div class="space-y-3">
+                        <label class="block text-xs font-semibold text-slate-700">Select User Persona</label>
+                        <select id="authPersona" onchange="updatePersona()" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-800 focus:outline-hidden">
+                            <option value="customer">Customer (Standard User)</option>
+                            <option value="support">Support Agent (Tier 1)</option>
+                            <option value="admin">System Administrator (Privileged)</option>
+                        </select>
+
+                        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+                            <p class="text-xs font-bold text-slate-800">Persona Privileges:</p>
+                            <ul id="personaPrivileges" class="list-disc pl-5 text-xs text-slate-600 space-y-1">
+                                <li>View own account balance & transaction history</li>
+                                <li>Initiate payments via tokenized gateway</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between">
+                        <div>
+                            <p class="text-xs font-bold text-slate-800 mb-2">Endpoint Authorization Test:</p>
+                            <div id="endpointTestResult" class="space-y-2 text-xs font-mono">
+                                <div class="p-2 bg-white rounded-lg border border-slate-200 flex justify-between items-center">
+                                    <span>/api/v1/customer/balance</span>
+                                    <span class="text-emerald-600 font-bold">200 OK (Authorized)</span>
+                                </div>
+                                <div class="p-2 bg-white rounded-lg border border-slate-200 flex justify-between items-center">
+                                    <span>/api/v1/admin/ledger-override</span>
+                                    <span class="text-rose-600 font-bold">403 Forbidden</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="testApiAccess()" class="mt-4 w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-2 rounded-xl text-xs transition-all">
+                            Run API Access Simulation
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 4: AUDIT & SIEM LOGS ================= -->
+        <div id="section-logs" class="hidden space-y-6">
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-4">
+                <h3 class="text-base font-bold text-slate-900 flex items-center space-x-2">
+                    <i data-lucide="terminal" class="w-5 h-5 text-emerald-600"></i>
+                    <span>Centralized Logging & SIEM Monitoring</span>
+                </h3>
+                <p class="text-xs text-slate-500">Real-time audit trail capturing security events, authentication attempts, and API transactions across all domains.</p>
+                
+                <div class="bg-slate-900 text-slate-200 rounded-xl p-4 font-mono text-xs space-y-1.5 max-h-[360px] overflow-y-auto">
+                    <div id="siemLogContainer">
+                        <p class="text-slate-500">[00:00:01] [GATEWAY] TLS 1.3 handshake established from secure client IP.</p>
+                        <p class="text-slate-500">[00:00:02] [AUTH] OAuth2 token issued for customer session #8921.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 5: SECURITY BLUEPRINT ================= -->
+        <div id="section-docs" class="hidden space-y-6">
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-4">
+                <h3 class="text-lg font-bold text-slate-900 flex items-center space-x-2">
+                    <i data-lucide="book-open" class="w-5 h-5 text-emerald-600"></i>
+                    <span>Project 6: Secure Multi-Domain Payment Company Blueprint</span>
+                </h3>
+                <div class="prose prose-sm text-slate-600 space-y-3 text-xs sm:text-sm">
+                    <p>This prototype demonstrates cybersecurity architecture and secure application development across multiple domains for a financial services company:</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>Domain Separation:</strong> Decouples public marketing, customer portals, payment gateways, and admin dashboards into distinct security perimeters.</li>
+                        <li><strong>Secure Password Handling:</strong> Employs salted cryptographic hashing (Bcrypt equivalent) to protect credentials.</li>
+                        <li><strong>Payment Tokenization:</strong> Ensures raw credit card data never touches internal databases by substituting tokens via secure vaults.</li>
+                        <li><strong>Input Validation & API Security:</strong> Validates all parameters and enforces strict OAuth2 token verification.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-4 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500">
+            PayGuard Nexus &bull; Project 6 &bull; Secure Multi-Domain Payment Architecture
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        lucide.createIcons();
+
+        function switchTab(tabName) {
+            ['domains', 'payment', 'auth', 'logs', 'docs'].forEach(t => {
+                document.getElementById(`section-${t}`).classList.add('hidden');
+                document.getElementById(`tab-${t}`).classList.remove('bg-white', 'text-emerald-600', 'shadow-xs');
+                document.getElementById(`tab-${t}`).classList.add('text-slate-600');
+            });
+            document.getElementById(`section-${tabName}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabName}`).classList.add('bg-white', 'text-emerald-600', 'shadow-xs');
+            document.getElementById(`tab-${tabName}`).classList.remove('text-slate-600');
+        }
+
+        function logSiem(message, type = 'info') {
+            const container = document.getElementById('siemLogContainer');
+            const p = document.createElement('p');
+            const time = new Date().toLocaleTimeString();
+            if (type === 'success') p.className = 'text-emerald-400';
+            else if (type === 'warn') p.className = 'text-amber-400';
+            else if (type === 'error') p.className = 'text-rose-400';
+            else p.className = 'text-slate-300';
+            p.textContent = `[${time}] ${message}`;
+            container.appendChild(p);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function processPayment() {
+            const name = document.getElementById('cardName').value;
+            const badge = document.getElementById('payStatusBadge');
+            const vault = document.getElementById('paymentVaultLog');
+            
+            badge.textContent = "PROCESSING";
+            badge.className = "px-2 py-0.5 bg-amber-500/20 text-amber-400 text-[10px] rounded-md font-bold";
+            
+            vault.innerHTML = `
+                <p class="text-amber-400">[Gateway] Receiving payment payload for cardholder: ${name}</p>
+                <p class="text-slate-400">[Vault] Stripping raw PAN data...</p>
+            `;
+            logSiem(`[GATEWAY] Payment initiation received from customer domain.`, 'info');
+
+            setTimeout(() => {
+                const token = "tok_sec_" + Math.random().toString(36).substring(2, 12);
+                badge.textContent = "SECURED";
+                badge.className = "px-2 py-0.5 bg-emerald-500/20 text-emerald-400 text-[10px] rounded-md font-bold";
+                vault.innerHTML += `
+                    <p class="text-emerald-400">[Vault Success] Card tokenized successfully.</p>
+                    <p class="font-mono text-xs text-indigo-300">[Generated Token]: ${token}</p>
+                    <p class="text-slate-400">[Backend] Transaction $150.00 authorized securely.</p>
+                `;
+                logSiem(`[VAULT] Card successfully tokenized. Token ID: ${token}`, 'success');
+            }, 800);
+        }
+
+        function updatePersona() {
+            const persona = document.getElementById('authPersona').value;
+            const privs = document.getElementById('personaPrivileges');
+            
+            if (persona === 'admin') {
+                privs.innerHTML = `
+                    <li>Full administrative control across all domains</li>
+                    <li>Access to /api/v1/admin/ ledger overrides</li>
+                    <li>Hardware token MFA validation required</li>
+                `;
+                logSiem(`[AUTH] Persona switched to System Administrator.`, 'warn');
+            } else if (persona === 'support') {
+                privs.innerHTML = `
+                    <li>View customer transaction logs & assist tickets</li>
+                    <li>Access to /api/v1/support/ endpoints</li>
+                    <li>Tier 1 authorization boundaries enforced</li>
+                `;
+                logSiem(`[AUTH] Persona switched to Support Agent.`, 'info');
+            } else {
+                privs.innerHTML = `
+                    <li>View own account balance & transaction history</li>
+                    <li>Initiate payments via tokenized gateway</li>
+                `;
+                logSiem(`[AUTH] Persona switched to Customer.`, 'info');
+            }
+            testApiAccess();
+        }
+
+        function testApiAccess() {
+            const persona = document.getElementById('authPersona').value;
+            const resContainer = document.getElementById('endpointTestResult');
+            
+            let adminStatus = persona === 'admin' ? '<span class="text-emerald-600 font-bold">200 OK (Authorized)</span>' : '<span class="text-rose-600 font-bold">403 Forbidden</span>';
+            let supportStatus = (persona === 'admin' || persona === 'support') ? '<span class="text-emerald-600 font-bold">200 OK (Authorized)</span>' : '<span class="text-rose-600 font-bold">403 Forbidden</span>';
+
+            resContainer.innerHTML = `
+                <div class="p-2 bg-white rounded-lg border border-slate-200 flex justify-between items-center">
+                    <span>/api/v1/customer/balance</span>
+                    <span class="text-emerald-600 font-bold">200 OK (Authorized)</span>
+                </div>
+                <div class="p-2 bg-white rounded-lg border border-slate-200 flex justify-between items-center">
+                    <span>/api/v1/support/tickets</span>
+                    ${supportStatus}
+                </div>
+                <div class="p-2 bg-white rounded-lg border border-slate-200 flex justify-between items-center">
+                    <span>/api/v1/admin/ledger-override</span>
+                    ${adminStatus}
+                </div>
+            `;
+            logSiem(`[RBAC] Authorization evaluation executed for role [${persona}].`, 'info');
+        }
+    </script>
+</body>
+</html>

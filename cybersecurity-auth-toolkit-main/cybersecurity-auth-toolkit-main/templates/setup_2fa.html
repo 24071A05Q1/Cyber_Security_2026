@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Configure Multi-Factor Auth</h2>
+<p style="font-size: 0.875rem; text-align: center; color: var(--text-secondary);">Scan this QR code using Google Authenticator.</p>
+{% if error %}
+    <div class="alert-error">{{ error }}</div>
+{% endif %}
+<div style="text-align: center; margin-bottom: 1rem;">
+    <img src="data:image/png;base64,{{ qr_code }}" alt="TOTP QR Code" style="max-width: 180px; border-radius: 4px; border: 1px solid var(--border-color);">
+</div>
+<form method="POST" action="{{ url_for('auth.setup_2fa') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <input type="hidden" name="secret" value="{{ secret }}">
+    <div class="form-group">
+        <label for="token">6-Digit Authenticator Code</label>
+        <input type="text" id="token" name="token" maxlength="6" required autocomplete="one-time-code">
+    </div>
+    <button type="submit">Confirm & Enable 2FA</button>
+</form>
+{% endblock %}

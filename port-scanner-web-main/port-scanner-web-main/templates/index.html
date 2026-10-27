@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Security Port Scanner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+    <header class="bg-white border-b border-slate-200 shadow-sm py-4 px-6">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+            <h1 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                🛡️ PortScanner <span class="text-xs font-semibold bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">Prototyper</span>
+            </h1>
+            <span class="text-sm text-slate-500">Educational Security Dashboard</span>
+        </div>
+    </header>
+    <main class="max-w-5xl mx-auto w-full px-6 py-8 flex-grow">
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-8">
+            <h2 class="text-lg font-semibold text-slate-900 mb-4">Configure Target Scan</h2>
+            <form method="POST" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Target Hostname or IP</label>
+                        <input type="text" name="target" required placeholder="e.g., scanme.nmap.org or 127.0.0.1" 
+                               class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-slate-800">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Port Selection</label>
+                        <input type="text" name="ports" value="common" placeholder="common, 80, 1-1024, etc." 
+                               class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-slate-800">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition duration-200 shadow-sm">
+                    Launch Scan
+                </button>
+            </form>
+            {% if error %}
+            <div class="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                <strong>Error:</strong> {{ error }}
+            </div>
+            {% endif %}
+        </div>
+        {% if results %}
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-slate-900">Scan Results</h3>
+                    <p class="text-sm text-slate-500">Target resolved to: <span class="font-mono text-slate-700">{{ target_ip }}</span></p>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs font-medium bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg">Completed in {{ duration }}s</span>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-slate-500 text-xs font-semibold uppercase tracking-wider">
+                            <th class="py-3 px-4">Port</th>
+                            <th class="py-3 px-4">Status</th>
+                            <th class="py-3 px-4">Likely Service</th>
+                            <th class="py-3 px-4">Banner / Info</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-sm">
+                        {% for r in results %}
+                        {% if r.status == 'Open' %}
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3 px-4 font-mono font-medium text-slate-900">{{ r.port }}</td>
+                            <td class="py-3 px-4"><span class="bg-emerald-100 text-emerald-700 text-xs font-semibold px-2.5 py-1 rounded-full">OPEN</span></td>
+                            <td class="py-3 px-4 text-slate-700">{{ r.service }}</td>
+                            <td class="py-3 px-4 font-mono text-xs text-slate-500 truncate max-w-xs">{{ r.banner }}</td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+    </main>
+    <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-400">
+        Port Scanner Prototype &bull; For Authorized Defensive Testing Only
+    </footer>
+</body>
+</html>
